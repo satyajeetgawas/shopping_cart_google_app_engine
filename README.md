@@ -9,12 +9,12 @@ Checking out the cart the, the cart is cleared and a thank you message is displa
 
 
 
-![alt tag](https://github.com/satyajeetgawas/shopping_cart_google_app_engine/blob/master/genre_page.png)
+![alt tag](https://github.com/satyajeetgawas/shopping_cart_google_app_engine/blob/master/genre_page.PNG)
 
 
 
 
-![alt tag](https://github.com/satyajeetgawas/shopping_cart_google_app_engine/blob/master/cart.png)
+![alt tag](https://github.com/satyajeetgawas/shopping_cart_google_app_engine/blob/master/cart.PNG)
 
 
-![alt tag](https://github.com/satyajeetgawas/shopping_cart_google_app_engine/blob/master/checkout.png)
+![alt tag](https://github.com/satyajeetgawas/shopping_cart_google_app_engine/blob/master/checkout.PNG)
