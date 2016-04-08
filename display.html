@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+
+<head>
+<title> Satyajeet Gawas's Book Repository
+ </title>
+<style>
+.button {
+  background-color: #555555;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+}
+.wrapper {  margin: 0 }
+
+.block-center { float:center; }
+.block-right { float: right; }
+
+</style>
+<script>
+function displayItems (items) {
+  if (items !=null)
+    alert(items + " item(s) added to the cart");
+}
+function validateForm() {
+    var x = document.getElementsByName("Add[]");
+    var chklength = x.length;  
+    var n_selected = 0;
+    var book_list = "";
+
+
+    for(k=0;k< chklength;k++)
+    {
+      if(x[k].checked)
+        book_list+=";"+x[k].value;
+        n_selected++;
+    } 
+     if (n_selected==0) {
+        alert("Please Select at least one item y");
+        return false;
+    }
+     var books = document.getElementById("books");
+     books.value = book_list;
+}
+
+</script>
+</head>
+<body onload="displayItems({{items}})">
+  <center>
+<br>
+<span class="block-center"><font size="+2" color="0000CC"> Satyajeet Gawas's Book Repository - Genre : {{genre}} </font> </span>
+<span class="block-right"><a href="{{main_url}}cart" class="button">View Cart</a></span>
+<br><br><br>
+<hr>
+<br><br>
+<form name="cart" action="{{main_url}}addtocart" method="post" onsubmit="return validateForm()">
+<table style="width:70%">
+  <tr>
+    <th>Author</th>
+    <th>Title</th>	
+    <th>Price</th>
+    <th>Select</th>	
+  </tr>
+  {% for book in books %}
+  <tr>
+   <td>{{book.author}}</td>   
+    <td>{{book.title}}</td>
+    <td>{{book.price}}</td>
+    <td>
+      <input type="checkbox" name="Add[]" value="{{book.author}}+{{book.title}}+{{book.price}}+{{genre}}"></td>
+  </tr>
+  {% endfor %}
+</table>
+<br>
+<input type="hidden" id="books" name="book_list" value"">
+<input type="hidden" name="genre_name" value="{{genre}}">
+<input type="submit" value="Add to Cart">
+</form>
+<br><br>
+<a href="{{main_url}}" class="button">Go to Main Page</a>
+</center>
+</body>
+</html>
+{% endautoescape %}

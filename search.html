@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <style>
+
+
+form div + div {
+    margin-top: 1em;
+}
+
+label {
+    /* To make sure that all labels have the same size and are properly aligned */
+    display: inline-block;
+    width: 200px;
+    text-align: right;
+}
+
+
+textarea {
+    /* To properly align multiline text fields with their labels */
+    vertical-align: top;
+
+    /* To give enough room to type some text */
+    height: 5em;
+
+    /* To allow users to resize any textarea vertically
+       It does not work on every browsers */
+    resize: vertical;
+}
+.wrapper {  margin: 0 }
+
+.block-center { float:center; }
+.block-right { float: right; }
+
+.button {
+  background-color: #555555;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+}
+</style>
+
+<script>
+function displayItems (items) {
+  if (items !=null)
+    alert(items + " item(s) added to the cart");
+}
+function validateForm() {
+    var x = document.forms["enter"]["author"].value;
+     if (x == null || x == "") {
+        alert("Please enter author name");
+        return false;
+    }
+    var x = document.forms["enter"]["genre_name"].value;
+    if (x == null || x == "") {
+        alert("Please enter a genre");
+        return false;
+    }
+}
+
+function validateCart() {
+    var x = document.getElementsByName("Add[]");
+    var chklength = x.length;  
+    var n_selected = 0;
+    var book_list = "";
+
+
+    for(k=0;k< chklength;k++)
+    {
+      if(x[k].checked)
+        book_list+=";"+x[k].value;
+        n_selected++;
+    } 
+     if (n_selected==0) {
+        alert("Please Select at least one item y");
+        return false;
+    }
+     var books = document.getElementById("books");
+     books.value = book_list;
+     
+}
+
+
+</script>
+  </head>  
+  <body body onload="displayItems({{items}})">
+    <center>
+      <br>
+      <span class="block-center"><font size="+2" color="0000CC"> Search Page </font></font> </span>
+      <span class="block-right"><a href="{{main_url}}cart" class="button">View Cart</a></span>
+      <br><br><br>
+      <hr>
+<br><br>
+{%if queried %}
+ {%if books %}
+ <p>Books found in {{genre}} genre</p>
+<form name="cart" action="{{main_url}}addtocart" method="post" onsubmit="return validateCart()">
+<table style="width:70%">
+  <tr>
+    <th>Author</th>
+    <th>Title</th> 
+    <th>Price</th>  
+    <th>Select</th> 
+  </tr>
+  {% for book in books %}
+  <tr>
+    <td>{{book.author}}</td> 
+    <td>{{book.title}}</td>
+    <td>{{book.price}}</td>
+     <td>
+      <input type="checkbox" name="Add[]" value="{{book.author}}+{{book.title}}+{{book.price}}+{{genre}}"></td>
+  </tr>
+  {% endfor %}
+</table>
+<br>
+<input type="hidden" id="books" name="book_list" value"">
+<input type="hidden" name="genre_name" value="{{genre}}">
+<input type="submit" value="Add to Cart">
+</form>
+<br><br>
+ {%else%}
+  <p>No books found</p>
+{% endif %}
+    <hr><br><br>
+{% endif %}
+
+    
+
+<form  name="enter" action="{{main_url}}search" onsubmit="return validateForm()" method="post">
+  <div>
+   <label for="author">Author's Name:</label>
+   <input type="text" name="author"> </div>
+   <div>
+   <label for="genre">Genre:</label>
+   <input type="text" name="genre_name"> </div>
+   <br>
+   <div>
+    <button type="submit">Search</button>
+   </div>
+  </form>
+  <br><br>
+<a href="{{main_url}}" class="button">Go to Main Page</a>
+
+   </center>
+
+</body></html>

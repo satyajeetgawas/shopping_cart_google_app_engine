@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+
+<head>
+<title> Cart </title>
+<style>
+.button {
+  background-color: #555555;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+}
+.wrapper {  margin: 0 }
+
+.block-left { float:left; }
+.block-right { float: right; }
+a {
+    font-size: 75%;
+}
+</style>
+<script>
+function validateForm() {
+   
+      
+}
+</script>
+</head>
+<body>
+  <center>
+<br>
+<font size="+2" color="0000CC"> My Cart </font> 
+<br><br><br>
+<hr>
+<br><br>
+
+<form name="cart" action="{{main_url}}checkout" method="post" onsubmit="return validateForm()">
+<table style="width:70%">
+  <tr>
+    <th>Author</th>
+    <th>Title</th>	
+    <th>Genre</th>
+    <th>Price</th>	
+  </tr>
+  {% for cart_item in items %}
+  <tr>
+   <td>{{cart_item.item.author}}<br><a href="{{main_url}}delete?item_id={{cart_item.item.title}}&index={{loop.index}}">Delete</a></td>   
+    <td>{{cart_item.item.title}}</td>
+    <td>{{cart_item.item.genre}}</td>
+    <td>{{cart_item.item.price}}</td>
+  </tr>
+  {% endfor %}
+</table>
+<br>
+<p><b>Total = {{total}}</b></p>
+<br>
+<input type="submit" value="Checkout">
+</form>
+<br><br>
+<a href="{{main_url}}" class="button">Go to Main Page</a>
+</center>
+</body>
+</html>
+{% endautoescape %}

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
+<style>
+
+form {
+    /* Just to center the form on the page */
+    margin: 0 auto;
+    width: 550px;
+    /* To see the outline of the form */
+    padding: 1em;
+    border: 1px solid #CCC;
+    border-radius: 1em;
+}
+
+form div + div {
+    margin-top: 1em;
+}
+
+label {
+    /* To make sure that all labels have the same size and are properly aligned */
+    display: inline-block;
+    width: 200px;
+    text-align: right;
+}
+
+input, textarea {
+    /* To make sure that all text fields have the same font settings
+       By default, textareas have a monospace font */
+    font: 1em sans-serif;
+
+    /* To give the same size to all text field */
+    width: 300px;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    /* To harmonize the look & feel of text field border */
+    border: 1px solid #999;
+}
+
+input:focus, textarea:focus {
+    /* To give a little highlight on active elements */
+    border-color: #000;
+}
+
+textarea {
+    /* To properly align multiline text fields with their labels */
+    vertical-align: top;
+
+    /* To give enough room to type some text */
+    height: 5em;
+
+    /* To allow users to resize any textarea vertically
+       It does not work on every browsers */
+    resize: vertical;
+}
+
+.button {
+  background-color: #555555;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+}
+</style>
+<script>
+function validateForm() {
+    var x = document.forms["enter"]["author"].value;
+    if (x == null || x == "") {
+        alert("Author name must be filled out");
+        return false;
+    }
+    x = document.forms["enter"]["title"].value;
+    if (x == null || x == "") {
+        alert("Title must be filled out");
+        return false;
+    }
+    x = document.forms["enter"]["genre_name"].value;
+    if (x == null || x == "") {
+        alert("Please enter a genre");
+        return false;
+    }
+    x = document.forms["enter"]["price"].value;
+    if (x == null || x == "" || isNaN(parseFloat(x)) || !isFinite(x)) {
+        alert("Please enter a valid price");
+        return false;
+    }
+   
+}
+</script>
+</head>  
+<body>
+  <center>
+    <br>
+    <font size="+2" color="0000CC"> Enter New Book Information </font>
+    <br><br>
+  
+<hr>
+<br>
+<div class="container">
+<form name="enter" action="{{main_url}}add" onsubmit="return validateForm()" method="POST">
+ <div>
+  <label for="author">Author's Name:</label>
+  <input type="text" name="author"> </div>
+      <div>
+  <label for="title">Title:</label>
+  <textarea name="title"></textarea></div>
+  <div>
+  <label for="title">Genre:</label>
+  <input type="text" name="genre_name">
+  </div>
+  <div>
+  <label for="title">Price:</label>
+  <input type="text" name="price">
+  </div>
+  <br>
+  <div><button type="submit">Enter book info</button></div>
+  </form>
+  
+  <br>
+  
+
+  <br>
+  <br>
+</form> 
+
+<!-- <form name="genre" onsubmit="return validateGenre()">Genre:
+      <input type="text" value="{{genre_name}}" name="genre_name">
+       <button type="submit">Switch</button>
+</form> -->
+</div>
+
+<br><br>
+<a href="{{main_url}}" class="button">Go to Main Page</a>
+</center>
+  
+
+</body></html>

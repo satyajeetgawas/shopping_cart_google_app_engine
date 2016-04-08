@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+
+<head>
+<title> Satyajeet Gawas's Book Repository
+ </title>
+<style>
+.button {
+  background-color: #555555;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+
+</style>
+
+</head>
+<body onload="displayItems({{items}})">
+  <center>
+<br>
+<span class="block-center"><font size="+2" color="0000CC"> Checkout </font> </span>
+<br><br><br>
+<hr>
+<br><br>
+<p> <b>Your cart summary</b></p>
+<br>
+<p> Total items purchased: {{items}}</p>
+<br>
+<p> Total Amount: {{amount}}</p>
+<br>
+<p> Thank you for shopping with us</p>
+<br><br>
+<a href="{{main_url}}" class="button">Go to Main Page</a>
+</center>
+</body>
+</html>
+{% endautoescape %}
